@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Médico Atlántico Sur · Espacio Terapéutico del Sur</title>
+  <meta name="description" content="Instituto Médico Atlántico Sur y Espacio Terapéutico del Sur. Especialidades médicas y terapéuticas, equipo de especialistas y solicitud de turnos online.">
+
+  <!-- Fuente moderna: Inter (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVEGACIÓN FIJA (sticky)
+       ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#inicio" class="navbar__brand" aria-label="Ir al inicio">
+        <img src="img/logos/instituto-medico-atlantico-sur.png" alt="Logo Instituto Médico Atlántico Sur" class="navbar__logo">
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#especialidades" class="nav-link">Especialidades y Sedes</a></li>
+          <li><a href="#especialistas" class="nav-link">Especialistas</a></li>
+          <li><a href="#turnos" class="nav-link">Solicitar Turno</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         A. HERO / INICIO
+         ============================================================ -->
+    <section id="inicio" class="hero">
+      <div class="container hero__content">
+        <p class="hero__eyebrow">Salud integral en dos sedes</p>
+        <h1 class="hero__title">
+          <span>Instituto Médico Atlántico Sur</span>
+          <span class="hero__title-sub">Espacio Terapéutico del Sur</span>
+        </h1>
+        <p class="hero__lead">
+          Atención médica y terapéutica cercana, con especialistas de confianza
+          y turnos simples de solicitar.
+        </p>
+        <!-- CTA: lleva directamente al formulario de turnos -->
+        <a href="#turnos" class="btn btn--primary btn--lg">Solicitar turno</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         B. ESPECIALIDADES Y SEDES (grilla con filtro)
+         ============================================================ -->
+    <section id="especialidades" class="section">
+      <div class="container">
+        <header class="section__header">
+          <h2>Especialidades y Sedes</h2>
+          <p>Filtrá por sede para ver las especialidades disponibles en cada lugar.</p>
+        </header>
+
+        <!-- Filtro por sede -->
+        <div class="filters" role="group" aria-label="Filtrar especialidades por sede">
+          <button class="filter-btn is-active" data-filter="todas">Todas</button>
+          <button class="filter-btn" data-filter="1">Instituto Médico Atlántico Sur</button>
+          <button class="filter-btn" data-filter="2">Espacio Terapéutico del Sur</button>
+        </div>
+
+        <!-- Grilla de tarjetas. Cada tarjeta tiene data-sede y data-especialidad.
+             Para agregar una foto: reemplazar el bloque "card__media--placeholder" por
+             <img src="img/especialidades/nombre.jpg" alt="Nombre"> -->
+        <div class="cards-grid" id="cardsGrid">
+
+          <!-- ===== SEDE 1: Instituto Médico Atlántico Sur ===== -->
+          <article class="card" data-sede="1" data-especialidad="cardiologia">
+            <div class="card__media"><img src="img/especialidades/cardiologia.jpg" alt="Cardiología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Cardiología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="traumatologia">
+            <div class="card__media"><img src="img/especialidades/traumatologia.jpg" alt="Traumatología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Traumatología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="odontologia">
+            <div class="card__media"><img src="img/especialidades/odontologia.jpg" alt="Odontología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Odontología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="dermatologia">
+            <div class="card__media"><img src="img/especialidades/dermatologia.jpg" alt="Dermatología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Dermatología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="cirugia">
+            <div class="card__media"><img src="img/especialidades/cirugia.jpg" alt="Cirugía" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Cirugía</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="neurologia">
+            <div class="card__media"><img src="img/especialidades/neurologia.jpg" alt="Neurología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Neurología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="obstetricia">
+            <div class="card__media"><img src="img/especialidades/obstetricia.jpg" alt="Obstetricia" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Obstetricia</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="otorrinolaringologia">
+            <div class="card__media"><img src="img/especialidades/otorrinolaringologia.jpg" alt="Otorrinolaringología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Otorrinolaringología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="diabetologia">
+            <div class="card__media"><img src="img/especialidades/diabetologia.jpg" alt="Diabetología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Diabetología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="resonancia">
+            <div class="card__media"><img src="img/especialidades/resonancia.jpg" alt="Resonancia magnética" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Resonancia</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="atencion-virtual">
+            <div class="card__media"><img src="img/especialidades/atencion-virtual.jpg" alt="Atención virtual" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Atención virtual</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="pediatria">
+            <div class="card__media"><img src="img/especialidades/pediatria.jpg" alt="Pediatría" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Pediatría</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="1" data-especialidad="clinica-medica">
+            <div class="card__media"><img src="img/especialidades/clinica-medica.jpg" alt="Clínica médica" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 1</span>
+              <h3 class="card__title">Clínica médica</h3>
+            </div>
+          </article>
+
+          <!-- ===== SEDE 2: Espacio Terapéutico del Sur ===== -->
+          <article class="card" data-sede="2" data-especialidad="psicologia">
+            <div class="card__media"><img src="img/especialidades/psicologia.jpg" alt="Psicología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Psicología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="psicopedagogia">
+            <div class="card__media"><img src="img/especialidades/psicopedagogia.jpg" alt="Psicopedagogía" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Psicopedagogía</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="fonoaudiologia">
+            <div class="card__media"><img src="img/especialidades/fonoaudiologia.jpg" alt="Fonoaudiología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Fonoaudiología</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="terapia-ocupacional">
+            <div class="card__media"><img src="img/especialidades/terapia-ocupacional.jpg" alt="Terapia ocupacional" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Terapia ocupacional</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="musicoterapia">
+            <div class="card__media"><img src="img/especialidades/musicoterapia.jpg" alt="Musicoterapia" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Musicoterapia</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="psicomotricidad">
+            <div class="card__media"><img src="img/especialidades/psicomotricidad.jpg" alt="Psicomotricidad" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Psicomotricidad</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="estimulacion-temprana">
+            <div class="card__media"><img src="img/especialidades/estimulacion-temprana.jpg" alt="Estimulación temprana" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Estimulación temprana</h3>
+            </div>
+          </article>
+
+          <article class="card" data-sede="2" data-especialidad="kinesiologia">
+            <div class="card__media"><img src="img/especialidades/kinesiologia.jpg" alt="Kinesiología" loading="lazy"></div>
+            <div class="card__body">
+              <span class="card__badge">Sede 2</span>
+              <h3 class="card__title">Kinesiología</h3>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Sin resultados para el filtro activo -->
+        <p class="cards-empty" id="cardsEmpty" hidden>No hay especialidades para este filtro.</p>
+
+        <!-- ===== Mapas de las sedes ===== -->
+        <div class="sedes-maps">
+
+          <div class="sede-map">
+            <h3>Sede 1 · Instituto Médico Atlántico Sur</h3>
+            <p class="sede-map__address">Villanueva 3520, La Boca</p>
+            <a class="sede-map__link" href="https://www.google.com/maps/search/?api=1&query=Villanueva+3520+La+Boca+Buenos+Aires" target="_blank" rel="noopener">Cómo llegar →</a>
+            <!-- PEGAR AQUÍ EL IFRAME DE GOOGLE MAPS SEDE 1 -->
+            <div class="map-frame">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d690.1276746543164!2d-58.3651399560256!3d-34.63402521814301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1794712768925!5m2!1ses-419!2sar"
+                title="Mapa Sede 1 · Instituto Médico Atlántico Sur" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+          </div>
+
+          <div class="sede-map">
+            <h3>Sede 2 · Espacio Terapéutico del Sur</h3>
+            <p class="sede-map__address">Ricardo Rojas 20547, Chacarita</p>
+            <a class="sede-map__link" href="https://www.google.com/maps/search/?api=1&query=Ricardo+Rojas+20547+Chacarita+Buenos+Aires" target="_blank" rel="noopener">Cómo llegar →</a>
+            <!-- PEGAR AQUÍ EL IFRAME DE GOOGLE MAPS SEDE 2 -->
+            <div class="map-frame">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2129.8456155053186!2d-58.45638214007705!3d-34.58719642437224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5e4f16280ed%3A0xe9081090e901558f!2sFederico%20Lacroze!5e0!3m2!1ses-419!2sar!4v1794712708508!5m2!1ses-419!2sar"
+                title="Mapa Sede 2 · Espacio Terapéutico del Sur" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         C. CARRUSEL DE ESPECIALISTAS
+         Para editar: cambiar src, data-nombre y data-especialidad de cada slide.
+         Las fotos de equipo no llevan especialidad (data-especialidad vacío).
+         ============================================================ -->
+    <section id="especialistas" class="section section--alt">
+      <div class="container">
+        <header class="section__header">
+          <h2>Nuestros Especialistas</h2>
+          <p>Profesionales comprometidos con tu salud.</p>
+        </header>
+
+        <div class="carousel" id="carousel" aria-roledescription="carrusel" aria-label="Especialistas">
+          <div class="carousel__track" id="carouselTrack">
+
+            <figure class="carousel__slide carousel__slide--blur is-active" style="--bg: url('img/especialistas/cardiologia-lucia-fernandez.jpg')" data-nombre="Dra. Lucía Fernández" data-especialidad="Cardiología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/cardiologia-lucia-fernandez.jpg" alt="Dra. Lucía Fernández, cardiología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Dra. Lucía Fernández</strong>
+                <span class="carousel__spec">Cardiología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/dermatologia-gabriel-suarez.jpg')" data-nombre="Dr. Gabriel Suárez" data-especialidad="Dermatología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/dermatologia-gabriel-suarez.jpg" alt="Dr. Gabriel Suárez, dermatología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Dr. Gabriel Suárez</strong>
+                <span class="carousel__spec">Dermatología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/odontologia-florencia-diaz.jpg')" data-nombre="Dra. Florencia Díaz" data-especialidad="Odontología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/odontologia-florencia-diaz.jpg" alt="Dra. Florencia Díaz, odontología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Dra. Florencia Díaz</strong>
+                <span class="carousel__spec">Odontología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/traumatologia-andres-molina.jpg')" data-nombre="Dr. Andrés Molina" data-especialidad="Traumatología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/traumatologia-andres-molina.jpg" alt="Dr. Andrés Molina, traumatología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Dr. Andrés Molina</strong>
+                <span class="carousel__spec">Traumatología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/psicologia-mariana-lopez.jpg')" data-nombre="Lic. Mariana López" data-especialidad="Psicología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/psicologia-mariana-lopez.jpg" alt="Lic. Mariana López, psicología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Lic. Mariana López</strong>
+                <span class="carousel__spec">Psicología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/fonoaudiologia-martin-suarez.jpg')" data-nombre="Lic. Martín Suárez" data-especialidad="Fonoaudiología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/fonoaudiologia-martin-suarez.jpg" alt="Lic. Martín Suárez, fonoaudiología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Lic. Martín Suárez</strong>
+                <span class="carousel__spec">Fonoaudiología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/kinesiologia-agustina-cabrera.jpg')" data-nombre="Lic. Agustina Cabrera" data-especialidad="Kinesiología">
+              <img class="slide-img slide-img--contain" src="img/especialistas/kinesiologia-agustina-cabrera.jpg" alt="Lic. Agustina Cabrera, kinesiología">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Lic. Agustina Cabrera</strong>
+                <span class="carousel__spec">Kinesiología</span>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/equipo-1.jpg')" data-nombre="Equipo de especialistas" data-especialidad="">
+              <img class="slide-img slide-img--contain" src="img/especialistas/equipo-1.jpg" alt="Equipo de especialistas del Instituto">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Equipo de especialistas</strong>
+              </figcaption>
+            </figure>
+
+            <figure class="carousel__slide carousel__slide--blur" style="--bg: url('img/especialistas/equipo-2.jpg')" data-nombre="Equipo de especialistas" data-especialidad="">
+              <img class="slide-img slide-img--contain" src="img/especialistas/equipo-2.jpg" alt="Equipo de especialistas del Instituto">
+              <figcaption class="carousel__caption">
+                <strong class="carousel__name">Equipo de especialistas</strong>
+              </figcaption>
+            </figure>
+
+          </div>
+
+          <button class="carousel__btn carousel__btn--prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+          <button class="carousel__btn carousel__btn--next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+
+          <div class="carousel__dots" id="carouselDots" aria-label="Indicadores"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         D. SOLICITUD DE TURNOS (envío por FormSubmit)
+         ============================================================ -->
+    <section id="turnos" class="section">
+      <div class="container container--narrow">
+        <header class="section__header">
+          <h2>Solicitar Turno</h2>
+          <p>Completá el formulario y nos comunicaremos para confirmar tu turno.</p>
+        </header>
+
+        <form id="turnoForm" class="form" novalidate>
+          <!--
+            CONFIGURACIÓN FORMSUBMIT (primer envío):
+            1. Completá el formulario y enviá una prueba.
+            2. FormSubmit enviará un correo de activación a ojoahi065@gmail.com.
+            3. Hacé clic en "Activate Form" dentro de ese correo.
+            4. A partir de ahí, los envíos llegan directamente a esa casilla.
+          -->
+          <!-- Campos de configuración para FormSubmit -->
+          <input type="hidden" name="_subject" value="Nueva solicitud de turno - Web">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Honeypot anti-spam: debe quedar vacío -->
+          <input type="text" name="_honey" class="form__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form__grid">
+            <div class="form__group">
+              <label for="nombre">Nombre y apellido <span class="req">*</span></label>
+              <input type="text" id="nombre" name="Nombre y apellido" required autocomplete="name" placeholder="Ej.: María Gómez">
+              <small class="form__error" data-error-for="nombre"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="dni">DNI / Documento <span class="req">*</span></label>
+              <input type="text" id="dni" name="DNI" required inputmode="numeric" placeholder="Sin puntos">
+              <small class="form__error" data-error-for="dni"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="telefono">Teléfono / WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="telefono" name="Teléfono - WhatsApp" required autocomplete="tel" placeholder="Ej.: 11 2345-6789">
+              <small class="form__error" data-error-for="telefono"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="email">Correo electrónico <span class="req">*</span></label>
+              <input type="email" id="email" name="Correo electrónico" required autocomplete="email" placeholder="tucorreo@ejemplo.com">
+              <small class="form__error" data-error-for="email"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="sede">Sede <span class="req">*</span></label>
+              <select id="sede" name="Sede" required>
+                <option value="" selected disabled>Seleccioná una sede</option>
+                <option value="1">Sede 1 · Instituto Médico Atlántico Sur</option>
+                <option value="2">Sede 2 · Espacio Terapéutico del Sur</option>
+              </select>
+              <small class="form__error" data-error-for="sede"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="especialidad">Especialidad <span class="req">*</span></label>
+              <!-- Las opciones se cargan con JavaScript según la sede elegida -->
+              <select id="especialidad" name="Especialidad" required disabled>
+                <option value="" selected disabled>Primero elegí una sede</option>
+              </select>
+              <small class="form__error" data-error-for="especialidad"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="profesional">Profesional <span class="req">*</span></label>
+              <!-- Las opciones se cargan con JavaScript según la especialidad -->
+              <select id="profesional" name="Profesional" required disabled>
+                <option value="" selected disabled>Primero elegí una especialidad</option>
+              </select>
+              <small class="form__error" data-error-for="profesional"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="fecha">Fecha preferida <span class="req">*</span></label>
+              <input type="date" id="fecha" name="Fecha preferida" required>
+              <small class="form__error" data-error-for="fecha"></small>
+            </div>
+
+            <div class="form__group">
+              <label for="franja">Franja horaria <span class="req">*</span></label>
+              <!-- La franja se asigna según el profesional y el día elegidos -->
+              <select id="franja" name="Franja horaria" required disabled>
+                <option value="" selected disabled>Primero elegí profesional y fecha</option>
+              </select>
+              <small class="form__error" data-error-for="franja"></small>
+            </div>
+
+            <div class="form__group form__group--full">
+              <label for="motivo">Tipo de consulta <span class="optional">(opcional)</span></label>
+              <select id="motivo" name="Tipo de consulta">
+                <option value="">Elegí una opción</option>
+                <option value="Consulta de control">Consulta de control</option>
+                <option value="Primera consulta">Primera consulta</option>
+                <option value="Estudio o práctica">Estudio o práctica</option>
+                <option value="Renovación de receta o pedido">Renovación de receta o pedido</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="form__group form__group--full form__group--consent">
+              <label class="form__check" for="privacidad">
+                <input type="checkbox" id="privacidad" name="Consentimiento de datos" value="Acepto" required>
+                <span>Acepto que el Instituto trate mis datos personales, incluida la especialidad elegida, que puede revelar datos de salud, para gestionar mi solicitud de turno, conforme al <a href="#privacidad">Aviso de privacidad</a>. <span class="req">*</span></span>
+              </label>
+              <small class="form__error" data-error-for="privacidad"></small>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block" id="submitBtn">
+            <span class="btn__text">Enviar solicitud</span>
+            <span class="btn__spinner" aria-hidden="true"></span>
+          </button>
+
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="whatsapp-help">
+          <p>¿Necesitás consultar un cambio de horario o tenés dudas sobre tu turno?</p>
+          <a class="btn btn--whatsapp btn--block" href="https://wa.me/541177430739?text=Hola%2C%20quisiera%20consultar%20un%20cambio%20de%20horario." target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         F. AVISO DE PRIVACIDAD (Ley 25.326)
+         ============================================================ -->
+    <section id="privacidad" class="section">
+      <div class="container container--narrow">
+        <header class="section__header">
+          <h2>Aviso de privacidad</h2>
+          <p>Última actualización: 16/11/2026</p>
+        </header>
+
+        <details class="legal-details">
+          <summary>Leer el aviso completo</summary>
+
+        <div class="legal">
+          <h3>1. Responsable del tratamiento</h3>
+          <p>Instituto Médico Atlántico Sur y Espacio Terapéutico del Sur (en adelante, "el Instituto"), con sede en Villanueva 3520, La Boca (Sede 1) y Ricardo Rojas 20547, Chacarita (Sede 2), Ciudad Autónoma de Buenos Aires.</p>
+
+          <h3>2. Datos que recopilamos</h3>
+          <p>Al solicitar un turno recopilamos: nombre y apellido, DNI, teléfono o WhatsApp, correo electrónico, sede, especialidad, profesional, fecha y franja preferidas, y el tipo de consulta si lo completás. El tipo de consulta se elige de una lista cerrada, sin detalles médicos. La especialidad elegida puede revelar datos de salud, que son datos sensibles.</p>
+
+          <h3>3. Finalidad</h3>
+          <p>Usamos tus datos para gestionar y confirmar tu solicitud de turno y para comunicarnos con vos por los medios que indicaste. No los utilizamos para otros fines ni los cedemos a terceros, salvo lo indicado en el punto 4.</p>
+
+          <h3>4. Servicio de envío de formularios</h3>
+          <p>Para enviar la solicitud utilizamos el servicio externo FormSubmit, que reenvía el formulario a la casilla de correo del Instituto. Ese servicio procesa los datos únicamente para este fin y puede alojarlos en servidores fuera de la Argentina.</p>
+
+          <h3>5. Conservación</h3>
+          <p>Conservamos tus datos durante 365 días desde la solicitud, salvo que la normativa aplicable exija un plazo mayor.</p>
+
+          <h3>6. Tus derechos</h3>
+          <p>Como titular de los datos podés ejercer los derechos de acceso, rectificación, actualización y supresión previstos en la Ley 25.326, y revocar tu consentimiento en cualquier momento. Para hacerlo escribinos a instituto_del_sur@mail.com o por WhatsApp al +54 11 7743-0739. Si considerás que no atendimos tu solicitud, podés presentar un reclamo ante la Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326.</p>
+
+          <h3>7. Consentimiento</h3>
+          <p>Al tildar la casilla del formulario de turnos, prestás tu consentimiento libre, expreso e informado para el tratamiento de tus datos, incluidos los datos de salud que informes, para la finalidad indicada en este aviso.</p>
+
+          <h3>8. Seguridad y cambios</h3>
+          <p>Adoptamos medidas razonables para proteger tus datos, aunque ninguna transmisión por internet es completamente segura. Podemos actualizar este aviso; la versión vigente es la publicada en esta página.</p>
+        </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       E. FOOTER
+       ============================================================ -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__grid">
+
+      <div class="footer__col">
+        <img src="img/logos/instituto-medico-atlantico-sur.png" alt="Logo Instituto Médico Atlántico Sur" class="footer__logo">
+        <h4>Sede 1</h4>
+        <p>Instituto Médico Atlántico Sur</p>
+        <p>Villanueva 3520, La Boca</p>
+      </div>
+
+      <div class="footer__col">
+        <img src="img/logos/espacio-terapeutico-del-sur.png" alt="Logo Espacio Terapéutico del Sur" class="footer__logo">
+        <h4>Sede 2</h4>
+        <p>Espacio Terapéutico del Sur</p>
+        <p>Ricardo Rojas 20547, Chacarita</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Horarios</h4>
+        <p>Lunes a viernes de 8 a 21 hs</p>
+        <h4>Contacto</h4>
+        <p><a href="tel:+541177430739">+54 11 7743-0739</a></p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Enlaces rápidos</h4>
+        <ul class="footer__links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#especialidades">Especialidades y Sedes</a></li>
+          <li><a href="#especialistas">Especialistas</a></li>
+          <li><a href="#turnos">Solicitar Turno</a></li>
+          <li><a href="#privacidad">Aviso de privacidad</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Instituto Médico Atlántico Sur · Espacio Terapéutico del Sur. Todos los derechos reservados.</p>
+        <p class="footer__credit">Hecho por <a href="https://beacons.ai/drazcaballero" target="_blank" rel="noopener">draz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de confirmación de envío -->
+  <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal__box">
+      <div class="modal__icon" aria-hidden="true">✓</div>
+      <h3 id="modalTitle">¡Solicitud enviada!</h3>
+      <p>Recibimos tu solicitud de turno. Nos comunicaremos a la brevedad para confirmarlo.</p>
+      <button class="btn btn--primary" id="modalClose">Entendido</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

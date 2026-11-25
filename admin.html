@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de administración · EJEMPLO</title>
+  <style>
+    :root {
+      --c-primary: #1f6f8b;
+      --c-primary-dark: #17566d;
+      --c-accent: #5fc2b0;
+      --c-bg: #eef3f6;
+      --c-card: #ffffff;
+      --c-line: #e3e9ee;
+      --c-text: #1e2a36;
+      --c-muted: #6b7a88;
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(15, 45, 60, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--c-bg);
+      color: var(--c-text);
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select { font: inherit; }
+    .hidden { display: none !important; }
+
+    /* Banner */
+    .banner {
+      background: linear-gradient(90deg, #fde68a, #fef3c7);
+      color: #7a4f00;
+      text-align: center;
+      padding: 9px 14px;
+      font-size: .85rem;
+      font-weight: 600;
+    }
+
+    /* Botones */
+    .btn {
+      background: var(--c-primary);
+      color: #fff;
+      border: 0;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      box-shadow: 0 2px 6px rgba(11, 110, 128, .25);
+    }
+    .btn:hover { background: var(--c-primary-dark); transform: translateY(-1px); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn--ghost { background: #fff; color: var(--c-primary); border: 1px solid #cfe3e8; box-shadow: none; }
+    .btn--ghost:hover { background: #f1f8fa; }
+    .btn--soft { background: #e8f6f2; color: #0f6e5a; box-shadow: none; }
+    .btn--soft:hover { background: #d4efe7; }
+    .btn--danger { background: #fff; color: #b42318; border: 1px solid #f5c2bd; box-shadow: none; }
+    .btn--danger:hover { background: #fdecea; }
+    .btn--block { width: 100%; }
+    .btn--small { padding: 7px 12px; font-size: .85rem; border-radius: 8px; }
+
+    /* Login */
+    .login {
+      min-height: calc(100vh - 40px);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #17566d 0%, #1f6f8b 45%, #5fc2b0 100%);
+    }
+    .login__box {
+      background: var(--c-card);
+      padding: 36px 32px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 50px rgba(15, 45, 60, .15);
+    }
+    .brand {
+      display: block; height: 64px; width: auto; max-width: 100%; margin: 0 auto 18px;
+    }
+    .login__box h1 { font-size: 1.4rem; margin: 0 0 4px; }
+    .login__box .sub { color: var(--c-muted); margin: 0 0 24px; font-size: .92rem; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .field label { font-size: .85rem; font-weight: 600; }
+    .field input {
+      padding: 12px 14px;
+      border: 1px solid #d3dde4;
+      border-radius: 10px;
+      background: #fbfdfe;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field input:focus { outline: none; border-color: var(--c-primary); box-shadow: 0 0 0 4px rgba(11, 110, 128, .15); }
+    .error { color: #b42318; font-size: .9rem; min-height: 1.3em; margin: 0 0 6px; }
+    .demo-hint {
+      font-size: .82rem; color: var(--c-muted); margin-top: 16px;
+      background: #f4f8fa; border-radius: 10px; padding: 10px 12px;
+    }
+
+    /* Header del panel */
+    .top {
+      background: linear-gradient(120deg, var(--c-primary-dark), var(--c-primary) 55%, #1a8ea3);
+      color: #fff;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .top h1 { font-size: 1.25rem; margin: 0; }
+    .top p { margin: 4px 0 0; opacity: .85; font-size: .9rem; }
+    .top .btn--ghost { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.35); }
+    .top .btn--ghost:hover { background: rgba(255,255,255,.22); }
+
+    main.panel { padding: 24px 28px 40px; max-width: 1180px; margin: 0 auto; display: grid; gap: 22px; }
+
+    /* Tarjetas */
+    .card { background: var(--c-card); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .card__head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .card h2 { font-size: 1.08rem; margin: 0; }
+    .card__hint { color: var(--c-muted); font-size: .85rem; }
+
+    /* KPIs */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+    .kpi {
+      border-radius: 14px; padding: 18px; color: var(--c-text);
+      background: #f7fafc; border: 1px solid var(--c-line);
+      position: relative; overflow: hidden;
+    }
+    .kpi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--k, var(--c-primary)); }
+    .kpi b { display: block; font-size: 2rem; line-height: 1.1; color: var(--k, var(--c-primary)); }
+    .kpi span { color: var(--c-muted); font-size: .88rem; font-weight: 500; }
+    .kpi--total { --k: #0b6e80; }
+    .kpi--pend { --k: #d97706; }
+    .kpi--ok { --k: #15803d; }
+    .kpi--cancel { --k: #b42318; }
+
+    /* Filtros */
+    .filters { display: flex; gap: 10px; flex-wrap: wrap; }
+    .filters select {
+      padding: 9px 12px; border: 1px solid #d3dde4; border-radius: 10px; background: #fff; min-width: 180px;
+    }
+    .filters select:focus { outline: none; border-color: var(--c-primary); }
+
+    /* Tabla */
+    .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--c-line); }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 760px; }
+    th, td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--c-line); vertical-align: middle; }
+    th {
+      background: #f5f8fa; color: var(--c-muted); font-weight: 700;
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .05em;
+    }
+    tbody tr { transition: background .12s; }
+    tbody tr:hover { background: #f9fcfd; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .pac { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+      font-weight: 700; font-size: .85rem; color: #fff; flex-shrink: 0;
+      background: linear-gradient(135deg, #0b6e80, #5ec8b5);
+    }
+    .sub-txt { color: var(--c-muted); font-size: .85rem; }
+    .sede-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: .8rem; font-weight: 600;
+      background: #eaf4f7; color: var(--c-primary);
+    }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+    .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .b-pend { background: #fef3c7; color: #92400e; }
+    .b-ok { background: #dcfce7; color: #166534; }
+    .b-cancel { background: #fee2e2; color: #991b1b; }
+    .b-rep { background: #fef3c7; color: #92400e; }
+    .resched {
+      margin-top: 6px; padding: 6px 8px; border: 1px solid #d3dde4; border-radius: 8px; background: #fff; font-size: .85rem; max-width: 220px;
+    }
+    .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .empty { text-align: center; color: var(--c-muted); padding: 28px; }
+
+    /* Grilla de tarjetas inferiores */
+    .grid-2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* Historial */
+    .timeline { list-style: none; padding: 0; margin: 0; max-height: 280px; overflow: auto; }
+    .timeline li {
+      position: relative; padding: 0 0 14px 22px; font-size: .9rem; border-left: 2px solid var(--c-line); margin-left: 6px;
+    }
+    .timeline li::before {
+      content: ""; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--c-accent); box-shadow: 0 0 0 3px #e6f7f3;
+    }
+    .timeline time { display: block; color: var(--c-muted); font-size: .78rem; margin-bottom: 2px; }
+
+    /* Conexiones */
+    .conn { display: grid; gap: 10px; }
+    .conn-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; background: #f7fafc; border: 1px solid var(--c-line);
+    }
+    .conn-ico {
+      width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: .8rem; color: #fff; flex-shrink: 0;
+    }
+    .conn-item b { display: block; font-size: .93rem; }
+    .conn-item small { color: var(--c-muted); font-size: .82rem; }
+    .pill { margin-left: auto; font-size: .75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .pill--warn { background: #fef3c7; color: #92400e; }
+    .pill--off { background: #eef1f4; color: #5b6b7a; }
+    .pill--on { background: #dcfce7; color: #166534; }
+
+    /* Secretarías */
+    .accounts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+    .acc {
+      border: 1px solid var(--c-line); border-radius: 14px; padding: 16px; background: #fff;
+      border-top: 4px solid var(--c-primary);
+    }
+    .acc:nth-child(2) { border-top-color: var(--c-accent); }
+    .acc h3 { margin: 0 0 4px; font-size: 1rem; }
+    .acc p { margin: 0 0 10px; color: var(--c-muted); font-size: .85rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { font-size: .75rem; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: #e8f6f2; color: #0f6e5a; }
+    .chip--no { background: #f1f4f7; color: #6b7a88; text-decoration: line-through; }
+    .note { color: var(--c-muted); font-size: .84rem; margin: 14px 0 0; }
+
+    /* Toast */
+    .toast {
+      position: fixed; right: 22px; bottom: 22px; background: var(--c-primary-dark); color: #fff;
+      padding: 12px 18px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      font-size: .9rem; opacity: 0; transform: translateY(10px); transition: all .25s ease; pointer-events: none; max-width: 340px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="banner">EJEMPLO DE DEMOSTRACIÓN · Datos ficticios · Acceso no real · Así se vería el panel con el plan Bellatrix</div>
+
+  <!-- ============ LOGIN ============ -->
+  <section id="loginView" class="login">
+    <form id="loginForm" class="login__box" autocomplete="off">
+      <img class="brand" src="img/logos/instituto-medico-atlantico-sur.png" alt="Instituto Médico Atlántico Sur">
+      <h1>Panel de administración</h1>
+      <p class="sub">Instituto Médico Atlántico Sur · Espacio Terapéutico del Sur</p>
+      <div class="field">
+        <label for="user">Usuario</label>
+        <input id="user" type="text" required>
+      </div>
+      <div class="field">
+        <label for="pass">Clave</label>
+        <input id="pass" type="password" required>
+      </div>
+      <p id="loginError" class="error" role="alert"></p>
+      <button class="btn btn--block" type="submit">Ingresar</button>
+      <p class="demo-hint">Usuario de demostración: <b>admin</b> · Clave: <b>demo1234</b></p>
+    </form>
+  </section>
+
+  <!-- ============ PANEL ============ -->
+  <div id="panelView" class="hidden">
+    <header class="top">
+      <div>
+        <h1>Gestión de turnos</h1>
+        <p>Instituto Médico Atlántico Sur · 2 sedes</p>
+      </div>
+      <button class="btn btn--ghost btn--small" id="logout" type="button">Salir</button>
+    </header>
+
+    <main class="panel">
+
+      <section class="card">
+        <div class="card__head">
+          <h2>Resumen</h2>
+          <span class="card__hint">Estado actual de la agenda</span>
+        </div>
+        <div class="stats">
+          <div class="kpi kpi--total"><b id="stTotal">0</b><span>Turnos cargados</span></div>
+          <div class="kpi kpi--pend"><b id="stPend">0</b><span>Reprogramados</span></div>
+          <div class="kpi kpi--ok"><b id="stOk">0</b><span>Confirmados</span></div>
+          <div class="kpi kpi--cancel"><b id="stCancel">0</b><span>Cancelados</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__head">
+          <h2>Turnos agendados</h2>
+          <div class="filters">
+            <select id="fSede" aria-label="Filtrar por sede">
+              <option value="">Todas las sedes</option>
+              <option value="1">Sede 1 · La Boca</option>
+              <option value="2">Sede 2 · Chacarita</option>
+            </select>
+            <select id="fEstado" aria-label="Filtrar por estado">
+              <option value="">Todos los estados</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="reprogramado">Reprogramado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Paciente</th><th>Especialidad y profesional</th><th>Sede</th><th>Fecha y franja</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <p class="note">Cada cambio queda registrado en el historial. El envío real de mails y WhatsApp se configura en la implementación.</p>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card__head">
+            <h2>Historial de avisos (simulado)</h2>
+          </div>
+          <ul class="timeline" id="log"></ul>
+        </section>
+
+        <section class="card">
+          <div class="card__head">
+            <h2>Conexiones</h2>
+          </div>
+          <div class="conn">
+            <div class="conn-item">
+              <div class="conn-ico" style="background:#25d366">WA</div>
+              <div>
+                <b>WhatsApp Business</b>
+                <small>+54 9 11 7743-0739</small>
+              </div>
+              <span class="pill pill--warn">Pendiente de Meta</span>
+            </div>
+            <div class="conn-item">
+              <div class="conn-ico" style="background:#0b6e80">@</div>
+              <div>
+                <b>Mail de avisos</b>
+                <small>ojoahi065@gmail.com</small>
+              </div>
+              <span class="pill pill--warn">Pendiente de envío</span>
+            </div>
+            <div class="conn-item">
+              <div class="conn-ico" style="background:#3ecf8e">DB</div>
+              <div>
+                <b>Base de datos</b>
+                <small>Supabase</small>
+              </div>
+              <span class="pill pill--off">No conectada</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="card__head">
+          <h2>Cuentas de secretaría</h2>
+          <span class="card__hint">Permisos por cuenta</span>
+        </div>
+        <div class="accounts">
+          <div class="acc">
+            <h3>Secretaría 1</h3>
+            <p>Sede 1 · La Boca</p>
+            <div class="chips">
+              <span class="chip">Agenda</span>
+              <span class="chip">WhatsApp</span>
+              <span class="chip chip--no">Estadísticas</span>
+              <span class="chip chip--no">Facturación</span>
+            </div>
+          </div>
+          <div class="acc">
+            <h3>Secretaría 2</h3>
+            <p>Sede 2 · Chacarita</p>
+            <div class="chips">
+              <span class="chip">Agenda</span>
+              <span class="chip">WhatsApp</span>
+              <span class="chip chip--no">Estadísticas</span>
+              <span class="chip chip--no">Facturación</span>
+            </div>
+          </div>
+        </div>
+        <p class="note">En la implementación real, cada cuenta tiene su propia clave y cada acción queda registrada.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // ---- Credenciales de demostración (no son reales) ----
+      const DEMO_USER = "admin";
+      const DEMO_PASS = "demo1234";
+
+      const FRANJAS = ["Mañana (08:00 a 12:00)", "Tarde (13:00 a 18:00)", "Vespertino (18:00 a 21:00)"];
+      const COLORES = ["#0b6e80", "#5ec8b5", "#7c6fd6", "#e07a5f", "#3b82f6", "#d97706"];
+
+      // ---- Datos ficticios ----
+      let turnos = [
+        { id: 1, paciente: "Juan Pérez", esp: "Cardiología", prof: "Dra. Lucía Fernández", sede: "1", fecha: "2026-11-25", franja: 0, estado: "confirmado" },
+        { id: 2, paciente: "María Gómez", esp: "Psicología", prof: "Lic. Mariana López", sede: "2", fecha: "2026-11-25", franja: 1, estado: "confirmado" },
+        { id: 3, paciente: "Carlos Ruiz", esp: "Traumatología", prof: "Dr. Andrés Molina", sede: "1", fecha: "2026-11-26", franja: 2, estado: "reprogramado" },
+        { id: 4, paciente: "Ana Torres", esp: "Odontología", prof: "Dra. Florencia Díaz", sede: "1", fecha: "2026-11-27", franja: 0, estado: "confirmado" },
+        { id: 5, paciente: "Luis Martínez", esp: "Kinesiología", prof: "Lic. Agustina Cabrera", sede: "2", fecha: "2026-11-27", franja: 1, estado: "confirmado" },
+        { id: 6, paciente: "Sofía Romero", esp: "Dermatología", prof: "Dr. Gabriel Suárez", sede: "1", fecha: "2026-11-30", franja: 2, estado: "cancelado" },
+      ];
+
+      const log = [];
+
+      // ---- Helpers ----
+      const $ = (id) => document.getElementById(id);
+      const sedeTxt = (s) => (s === "1" ? "Sede 1 · La Boca" : "Sede 2 · Chacarita");
+      const estadoBadge = (e) => {
+        const cls = { confirmado: "b-ok", reprogramado: "b-rep", cancelado: "b-cancel" }[e];
+        const txt = { confirmado: "Confirmado", reprogramado: "Reprogramado", cancelado: "Cancelado" }[e];
+        return '<span class="badge ' + cls + '">' + txt + "</span>";
+      };
+      const fmtFecha = (iso) => {
+        const [y, m, d] = iso.split("-");
+        return d + "/" + m + "/" + y;
+      };
+      const iniciales = (nombre) => nombre.split(" ").map((p) => p[0]).slice(0, 2).join("");
+      const colorDe = (id) => COLORES[id % COLORES.length];
+      const ahora = () => new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+      const escapar = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+      let toastTimer = null;
+      function toast(msg) {
+        const t = $("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+      }
+
+      function addLog(texto) {
+        log.unshift({ hora: ahora(), texto });
+        renderLog();
+      }
+
+      function renderLog() {
+        const ul = $("log");
+        if (!log.length) {
+          ul.innerHTML = '<li><time>Sin movimientos</time>Las acciones sobre los turnos aparecen acá.</li>';
+          return;
+        }
+        ul.innerHTML = log
+          .map((l) => "<li><time>" + l.hora + "</time>" + escapar(l.texto) + "</li>")
+          .join("");
+      }
+
+      function renderStats() {
+        $("stTotal").textContent = turnos.length;
+        $("stPend").textContent = turnos.filter((t) => t.estado === "reprogramado").length;
+        $("stOk").textContent = turnos.filter((t) => t.estado === "confirmado").length;
+        $("stCancel").textContent = turnos.filter((t) => t.estado === "cancelado").length;
+      }
+
+      function renderTabla() {
+        const fSede = $("fSede").value;
+        const fEstado = $("fEstado").value;
+        const lista = turnos.filter(
+          (t) => (!fSede || t.sede === fSede) && (!fEstado || t.estado === fEstado)
+        );
+        if (!lista.length) {
+          $("tbody").innerHTML = '<tr><td colspan="6" class="empty">No hay turnos con esos filtros.</td></tr>';
+          return;
+        }
+        $("tbody").innerHTML = lista
+          .map((t) => {
+            const opciones = FRANJAS.map(
+              (f, i) => '<option value="' + i + '"' + (i === t.franja ? " selected" : "") + ">" + f + "</option>"
+            ).join("");
+            const acciones =
+              t.estado === "cancelado"
+                ? '<span class="sub-txt">Sin acciones</span>'
+                : '<button class="btn btn--danger btn--small" data-act="cancelar" data-id="' + t.id + '">Cancelar</button>';
+            return (
+              "<tr>" +
+              '<td><div class="pac"><span class="avatar" style="background:' + colorDe(t.id) + '">' +
+              iniciales(t.paciente) + "</span><b>" + escapar(t.paciente) + "</b></div></td>" +
+              "<td>" + escapar(t.esp) + '<div class="sub-txt">' + escapar(t.prof) + "</div></td>" +
+              '<td><span class="sede-tag">' + sedeTxt(t.sede) + "</span></td>" +
+              "<td>" + fmtFecha(t.fecha) + '<br><select class="resched" data-act="reprogramar" data-id="' + t.id + '"' +
+              (t.estado === "cancelado" ? " disabled" : "") + ">" + opciones + "</select></td>" +
+              "<td>" + estadoBadge(t.estado) + "</td>" +
+              '<td><div class="actions">' + acciones + "</div></td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+      }
+
+      function renderTodo() {
+        renderStats();
+        renderTabla();
+        renderLog();
+      }
+
+      // ---- Acciones ----
+      function buscar(id) {
+        return turnos.find((t) => t.id === id);
+      }
+
+      $("tbody").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-act]");
+        if (!btn) return;
+        const t = buscar(Number(btn.dataset.id));
+        if (!t) return;
+        if (btn.dataset.act === "cancelar") {
+          t.estado = "cancelado";
+          addLog("Turno de " + t.paciente + " cancelado. Aviso por mail y WhatsApp (simulado).");
+          toast("Turno cancelado · " + t.paciente);
+        }
+        renderTodo();
+      });
+
+      $("tbody").addEventListener("change", (e) => {
+        const sel = e.target.closest("select[data-act='reprogramar']");
+        if (!sel) return;
+        const t = buscar(Number(sel.dataset.id));
+        if (!t) return;
+        t.franja = Number(sel.value);
+        t.estado = "reprogramado";
+        addLog("Turno de " + t.paciente + " reprogramado a " + FRANJAS[t.franja] + ". Aviso al paciente (simulado).");
+        toast("Turno reprogramado · " + t.paciente);
+        renderTodo();
+      });
+
+      $("fSede").addEventListener("change", renderTabla);
+      $("fEstado").addEventListener("change", renderTabla);
+
+      // ---- Login de demostración ----
+      $("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const u = $("user").value.trim();
+        const p = $("pass").value;
+        if (u === DEMO_USER && p === DEMO_PASS) {
+          $("loginError").textContent = "";
+          $("loginView").classList.add("hidden");
+          $("panelView").classList.remove("hidden");
+          $("pass").value = "";
+          renderTodo();
+        } else {
+          $("loginError").textContent = "Usuario o clave incorrectos (demo).";
+        }
+      });
+
+      $("logout").addEventListener("click", () => {
+        $("panelView").classList.add("hidden");
+        $("loginView").classList.remove("hidden");
+        $("user").value = "";
+        $("pass").value = "";
+      });
+
+      renderLog();
+    })();
+  </script>
+</body>
+</html>
