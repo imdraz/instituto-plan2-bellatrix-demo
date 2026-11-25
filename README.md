@@ -65,16 +65,3 @@ script.js       Filtros, carrusel, validación, configuración y envío del form
 img/            Fotos, logos y fondo
 README.md       Este archivo
 ```
-
-## Publicar
-
-1. Subí estos archivos a un repositorio público.
-2. En **Settings > Pages**, elegí la rama `main` y la carpeta `/ (root)`.
-3. El sitio queda disponible en `https://USUARIO.github.io/NOMBRE-DEL-REPOSITORIO/`.
-
-## Antes de usar datos reales
-
-- Reemplazar los datos de demostración por los profesionales y las fotos reales.
-- Confirmar nombres de sedes, direcciones y horarios.
-- Configurar el dominio del Instituto para el envío de correos.
-- Revisar el aviso de privacidad y los plazos de conservación con un abogado.
